@@ -14,8 +14,11 @@ RUN tar xf /opt/maven/apache-maven-bin.tar.gz -C /opt/maven --strip-components=1
 
 COPY pom.xml /app/pom.xml
 COPY api/pom.xml /app/api/pom.xml
-COPY api/src /app/api/src
 WORKDIR /app
+RUN mvn dependency:resolve
 
-RUN mvn clean package
-CMD mvn --projects=api exec:java
+COPY api/src /app/api/src
+RUN mvn package -DskipTests=true
+
+ENTRYPOINT ["mvn", "--projects=api"]
+CMD ["exec:java"]

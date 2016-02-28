@@ -90,5 +90,17 @@
     <build>
         <sourceDirectory>src/main/scala</sourceDirectory>
         <testSourceDirectory>src/test/scala</testSourceDirectory>
+
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
+
+                <configuration>
+                    <mainClass>com.bemorerandom.api.ApiServerMain</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

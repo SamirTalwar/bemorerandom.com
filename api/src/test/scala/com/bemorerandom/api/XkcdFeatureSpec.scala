@@ -16,6 +16,9 @@ class XkcdFeatureSpec extends FeatureTest {
           """{
             |    "random": {
             |        "number": 4
+            |    },
+            |    "documentation": {
+            |        "uri": "https://xkcd.com/221/"
             |    }
             |}
           """.stripMargin

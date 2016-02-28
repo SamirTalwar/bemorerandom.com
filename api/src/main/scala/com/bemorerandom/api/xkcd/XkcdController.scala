@@ -5,6 +5,6 @@ import com.twitter.finatra.http.Controller
 
 class XkcdController extends Controller {
   get("/xkcd") { request: Request =>
-    response.ok.json(Map("random" -> XkcdRandom))
+    response.ok.json(Xkcd.xkcd)
   }
 }

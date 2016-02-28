@@ -20,6 +20,10 @@
             <groupId>com.twitter.finatra</groupId>
             <artifactId>finatra-http_${scala.major.version}</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.twitter.finatra</groupId>
+            <artifactId>finatra-jackson_${scala.major.version}</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
@@ -68,6 +72,12 @@
         <dependency>
             <groupId>com.twitter.finatra</groupId>
             <artifactId>finatra-http_${scala.major.version}</artifactId>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.twitter.finatra</groupId>
+            <artifactId>finatra-jackson_${scala.major.version}</artifactId>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>

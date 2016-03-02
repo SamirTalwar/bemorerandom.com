@@ -17,7 +17,8 @@ class XkcdFeatureSpec extends FeatureTest {
             |    "random": {
             |        "number": 4
             |    },
-            |    "documentation": {
+            |    "attribution": {
+            |        "name": "xkcd",
             |        "uri": "https://xkcd.com/221/"
             |    }
             |}

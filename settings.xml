@@ -1,0 +1,43 @@
+<settings>
+    <profiles>
+        <profile>
+            <id>artifactory-cache</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>http://172.17.0.1:8081/artifactory/libs-release</url>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>snapshots</id>
+                    <url>http://172.17.0.1:8081/artifactory/libs-snapshot</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <url>http://172.17.0.1:8081/artifactory/plugins-release</url>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+                <pluginRepository>
+                    <id>snapshots</id>
+                    <url>http://172.17.0.1:8081/artifactory/plugins-snapshot</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>artifactory-cache</activeProfile>
+    </activeProfiles>
+</settings>

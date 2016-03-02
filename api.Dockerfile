@@ -12,6 +12,7 @@ RUN curl -fsSL "http://mirror.ox.ac.uk/sites/rsync.apache.org/maven/maven-3/$MAV
 RUN tar xf /opt/maven/apache-maven-bin.tar.gz -C /opt/maven --strip-components=1 \
     && rm /opt/maven/apache-maven-bin.tar.gz
 
+COPY settings.xml /root/.m2/settings.xml
 COPY pom.xml /app/pom.xml
 COPY api/pom.xml /app/api/pom.xml
 WORKDIR /app

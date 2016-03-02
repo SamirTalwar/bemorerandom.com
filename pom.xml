@@ -24,8 +24,10 @@
         <scala.major.version>2.11</scala.major.version>
 
         <finatra.version>2.1.4</finatra.version>
+        <flyway.version>4.0</flyway.version>
         <guice.version>4.0</guice.version>
         <logback.version>1.1.5</logback.version>
+        <postgresql.jdbc.version>9.4.1208</postgresql.jdbc.version>
 
         <junit.version>4.12</junit.version>
         <mockito.version>1.10.19</mockito.version>

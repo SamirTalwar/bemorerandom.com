@@ -15,73 +15,87 @@
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
         </dependency>
         <dependency>
             <groupId>com.twitter.finatra</groupId>
             <artifactId>finatra-http_${scala.major.version}</artifactId>
+            <version>${finatra.version}</version>
         </dependency>
         <dependency>
             <groupId>com.twitter.finatra</groupId>
             <artifactId>finatra-jackson_${scala.major.version}</artifactId>
+            <version>${finatra.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
         </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.scalatest</groupId>
             <artifactId>scalatest_${scala.major.version}</artifactId>
+            <version>${scalatest.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.google.inject.extensions</groupId>
             <artifactId>guice-testlib</artifactId>
+            <version>${guice.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.twitter.inject</groupId>
             <artifactId>inject-core_${scala.major.version}</artifactId>
+            <version>${finatra.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.twitter.inject</groupId>
             <artifactId>inject-app_${scala.major.version}</artifactId>
+            <version>${finatra.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.twitter.inject</groupId>
             <artifactId>inject-modules_${scala.major.version}</artifactId>
+            <version>${finatra.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.twitter.inject</groupId>
             <artifactId>inject-server_${scala.major.version}</artifactId>
+            <version>${finatra.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.twitter.finatra</groupId>
             <artifactId>finatra-http_${scala.major.version}</artifactId>
+            <version>${finatra.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.twitter.finatra</groupId>
             <artifactId>finatra-jackson_${scala.major.version}</artifactId>
+            <version>${finatra.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>

@@ -5,7 +5,9 @@ import scala.collection.JavaConverters._
 case class Config(database: Config.Database)
 
 object Config {
-  case class Database(url: String, user: String, password: String)
+  case class Database(url: String, user: String, password: String) {
+    val driver = slick.driver.PostgresDriver
+  }
 
   def fromEnvironmentVariables() = {
     val env = System.getenv().asScala

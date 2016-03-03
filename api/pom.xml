@@ -39,6 +39,11 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
+            <groupId>com.typesafe.slick</groupId>
+            <artifactId>slick_${scala.major.version}</artifactId>
+            <version>${slick.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
             <version>${flyway.version}</version>
@@ -108,6 +113,12 @@
             <artifactId>finatra-jackson_${scala.major.version}</artifactId>
             <version>${finatra.version}</version>
             <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json4s</groupId>
+            <artifactId>json4s-native_${scala.major.version}</artifactId>
+            <version>${json4s.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

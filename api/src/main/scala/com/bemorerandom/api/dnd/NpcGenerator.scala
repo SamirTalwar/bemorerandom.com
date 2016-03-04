@@ -6,22 +6,23 @@ import com.google.inject.Inject
 import slick.jdbc.JdbcBackend.DatabaseDef
 
 class NpcGenerator @Inject() (tables: Tables, database: DatabaseDef) {
-  import tables.driver.api._
   import tables._
+  import tables.driver.api._
 
   val random = SimpleFunction.nullary[Double]("RANDOM")
 
   def generate(sex: Sex, race: Race): Future[Npc] = {
     database.run(
-        tables.npcFirstNames.join(tables.npcLastNames)
+        tables.npcFirstNames.joinLeft(tables.npcLastNames)
           .on { case (first, last) => first.raceName === last.raceName }
           .filter { case (first, last) => first.sex === sex }
           .filter { case (first, last) => first.raceName === race.name }
-          .map { case (first, last) => (first.name, last.name) }
+          .map { case (first, last) => (first.name, last.map(_.name)) }
           .sortBy(_ => random)
           .take(1)
           .result)
         .map(_.head)
-      .map { case (firstName, lastName) => Npc(s"$firstName $lastName", sex, race) }
+      .map { case (firstName, lastName) => firstName + lastName.map(name => s" $name").getOrElse("") }
+      .map(name => Npc(name, sex, race))
   }
 }

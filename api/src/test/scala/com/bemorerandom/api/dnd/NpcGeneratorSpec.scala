@@ -13,6 +13,7 @@ import slick.jdbc.JdbcBackend
 class NpcGeneratorSpec extends FunSpec with Matchers with ScalaFutures with BeforeAndAfter {
   override implicit val patienceConfig = PatienceConfig(timeout = 1.second, interval = 100.milliseconds)
 
+  val dragonborn = Race("dragonborn")
   val dwarf = Race("dwarf")
 
   val databaseConfig = Config.fromEnvironmentVariables().database
@@ -47,6 +48,15 @@ class NpcGeneratorSpec extends FunSpec with Matchers with ScalaFutures with Befo
           be(Npc("Fenryl Copperhearth", Female, dwarf)) or
           be(Npc("Grenenzel Copperhearth", Female, dwarf))
         )
+      }
+
+      it("generates a name even when missing surnames") {
+        val generator = new NpcGenerator(tables, database)
+
+        generator.generate(Male, dragonborn).futureValue should (
+          be(Npc("Andujar", Male, dragonborn)) or
+          be(Npc("Armagan", Male, dragonborn)) or
+          be(Npc("Armek", Male, dragonborn)))
       }
     }
   }

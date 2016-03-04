@@ -1,6 +1,5 @@
 package com.bemorerandom.api.dnd
 
-import java.sql.SQLException
 import scala.concurrent.Await
 import scala.concurrent.duration._
 import com.bemorerandom.api.{Config, DatabaseConnector}
@@ -12,6 +11,8 @@ import slick.jdbc.JdbcBackend
 
 @RunWith(classOf[JUnitRunner])
 class NpcGeneratorSpec extends FunSpec with Matchers with ScalaFutures with BeforeAndAfter {
+  override implicit val patienceConfig = PatienceConfig(timeout = 1.second, interval = 100.milliseconds)
+
   val dwarf = Race("dwarf")
 
   val databaseConfig = Config.fromEnvironmentVariables().database
@@ -26,42 +27,13 @@ class NpcGeneratorSpec extends FunSpec with Matchers with ScalaFutures with Befo
     connector.clean()
     connector.migrate()
     database = connector.connect()
-    Await.result(
-      database.run(DBIO.seq(
-        sqlu"TRUNCATE TABLE dnd_npc_first_names",
-        sqlu"TRUNCATE TABLE dnd_npc_last_names")),
-      atMost = 1.second)
+    val sql = sqlu"#${io.Source.fromInputStream(getClass.getClassLoader.getResourceAsStream("db/static/dnd-npc-test-names.sql")).mkString}"
+    Await.result(database.run(sql), atMost = 1.second)
   }
 
   describe("the NPC name generator") {
     describe("given a race and sex") {
       it("generates a name") {
-        try {
-          Await.result(database.run(DBIO.seq(
-            tables.npcFirstNamesForInsert ++= Seq(
-              ("Beyla", Female, "dwarf"),
-              ("Fenryl", Female, "dwarf"),
-              ("Grenenzel", Female, "dwarf"),
-              ("Agaro", Male, "dwarf"),
-              ("Arnan", Male, "dwarf"),
-              ("Auxlan", Male, "dwarf"),
-              ("Aryllan", Female, "elf"),
-              ("Atalya", Female, "elf"),
-              ("Ayrthwil", Female, "elf")
-            ),
-            tables.npcLastNamesForInsert ++= Seq(
-              ("Ambershard", "dwarf"),
-              ("Barrelhelm", "dwarf"),
-              ("Copperhearth", "dwarf")
-            ))),
-            atMost = 1.second)
-        } catch {
-          case e: SQLException => {
-            e.getNextException.printStackTrace()
-            throw e
-          }
-        }
-
         val generator = new NpcGenerator(tables, database)
 
         generator.generate(Female, dwarf).futureValue should (

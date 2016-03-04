@@ -1,10 +1,11 @@
 package com.bemorerandom.api.dnd
 
+import scala.concurrent.Await
+import scala.concurrent.duration._
 import com.bemorerandom.api.{ApiServer, Config, DatabaseConnector}
 import com.twitter.finagle.http.Status
 import com.twitter.finatra.http.test.EmbeddedHttpServer
 import com.twitter.inject.server.FeatureTest
-import org.json4s
 import org.json4s._
 import org.json4s.native.JsonMethods
 import org.scalatest.BeforeAndAfter
@@ -14,11 +15,17 @@ class DndFeatureSpec extends FeatureTest with BeforeAndAfter {
 
   implicit val formats = DefaultFormats
 
+  val databaseConfig = Config.fromEnvironmentVariables().database
+  import databaseConfig.driver.api._
+
   before {
-    val databaseConfig = Config.fromEnvironmentVariables().database
     val connector = new DatabaseConnector(databaseConfig)
     connector.clean()
     connector.migrate()
+
+    val database = connector.connect()
+    val sql = sqlu"#${io.Source.fromInputStream(getClass.getClassLoader.getResourceAsStream("db/static/dnd-npc-test-names.sql")).mkString}"
+    Await.result(database.run(sql), atMost = 1.second)
   }
 
   "/dnd/npc" should {

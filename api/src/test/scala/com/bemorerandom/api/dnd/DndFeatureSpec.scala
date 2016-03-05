@@ -37,9 +37,11 @@ class DndFeatureSpec extends FeatureTest with BeforeAndAfter {
       val body = response.withReader(JsonMethods.parse(_))
       val Diff(changed, added, deleted) = body.diff(JObject(
         "random" -> JObject(
-          "npc" -> JObject(
-            "sex" -> JString("female"),
-            "race" -> JString("human")
+          "dnd" -> JObject(
+            "npc" -> JObject(
+              "sex" -> JString("female"),
+              "race" -> JString("human")
+            )
           )
         ),
         "attribution" -> JObject(
@@ -51,7 +53,7 @@ class DndFeatureSpec extends FeatureTest with BeforeAndAfter {
       changed should be (JNothing)
       added should be (JNothing)
 
-      val name = (deleted \ "random" \ "npc" \ "name").extract[String]
+      val name = (deleted \ "random" \ "dnd" \ "npc" \ "name").extract[String]
       name should fullyMatch regex "[A-Z][a-z]+ [A-Z][a-z]+"
     }
   }

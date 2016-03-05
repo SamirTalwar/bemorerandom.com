@@ -21,6 +21,7 @@ class ApiServer extends HttpServer {
 
   override protected def jacksonModule: Module = new FinatraJacksonModule {
     override protected def additionalJacksonModules: Seq[databind.Module] = Seq(
+      new SymbolTupleJacksonModule,
       new DndJacksonModule
     )
   }

@@ -23,11 +23,6 @@
             <version>${finatra.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.twitter.finatra</groupId>
-            <artifactId>finatra-jackson_${scala.major.version}</artifactId>
-            <version>${finatra.version}</version>
-        </dependency>
-        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>

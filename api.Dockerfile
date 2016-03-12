@@ -16,9 +16,9 @@ COPY settings.xml /root/.m2/settings.xml
 COPY pom.xml /app/pom.xml
 COPY api/pom.xml /app/api/pom.xml
 WORKDIR /app
-RUN mvn dependency:go-offline
+RUN mvn dependency:go-offline dependency:copy-dependencies
 
 COPY api/src /app/api/src
-RUN mvn package dependency:copy-dependencies -DskipTests=true -Djar.finalName=app
+RUN mvn package -DskipTests=true -Djar.finalName=app
 
 CMD java -cp api/target/app.jar:api/target/dependency/\* com.bemorerandom.api.ApiServerMain

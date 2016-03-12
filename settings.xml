@@ -4,14 +4,14 @@
             <id>artifactory-cache</id>
             <repositories>
                 <repository>
-                    <id>central</id>
+                    <id>libs-release</id>
                     <url>http://172.17.0.1:8081/artifactory/libs-release</url>
                     <snapshots>
                         <enabled>false</enabled>
                     </snapshots>
                 </repository>
                 <repository>
-                    <id>snapshots</id>
+                    <id>libs-snapshot</id>
                     <url>http://172.17.0.1:8081/artifactory/libs-snapshot</url>
                     <releases>
                         <enabled>false</enabled>
@@ -20,14 +20,14 @@
             </repositories>
             <pluginRepositories>
                 <pluginRepository>
-                    <id>central</id>
+                    <id>plugins-release</id>
                     <url>http://172.17.0.1:8081/artifactory/plugins-release</url>
                     <snapshots>
                         <enabled>false</enabled>
                     </snapshots>
                 </pluginRepository>
                 <pluginRepository>
-                    <id>snapshots</id>
+                    <id>plugins-snapshot</id>
                     <url>http://172.17.0.1:8081/artifactory/plugins-snapshot</url>
                     <releases>
                         <enabled>false</enabled>

@@ -12,10 +12,14 @@ object Config {
   }
 
   def fromEnvironmentVariables() = {
-    val env = System.getenv().asScala
-    val url = s"jdbc:postgresql://${env("DB_HOST")}:${env.getOrElse("DB_PORT", PostgresqlDefaultPort.toString)}/${env("DB_NAME")}"
-    Config(
-      database = Config.Database(url = url, user = env("DB_USER"), password = env("DB_PASSWORD"))
-    )
+    val env = System.getenv().asScala.toMap
+    Config(database = databaseConfigFrom(env))
+  }
+
+  private def databaseConfigFrom(env: Map[String, String]): Database = {
+    val host = env("DB_HOST")
+    val port = env.get("DB_PORT").map(Integer.parseInt).getOrElse(PostgresqlDefaultPort)
+    val url = s"jdbc:postgresql://$host:$port/${env("DB_NAME")}"
+    Config.Database(url = url, user = env("DB_USER"), password = env("DB_PASSWORD"))
   }
 }

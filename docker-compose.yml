@@ -1,0 +1,38 @@
+version: '2'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - DB_HOST=db.bemorerandomcom_default
+      - DB_NAME=bemorerandom
+      - DB_USER=bemorerandom
+      - DB_PASSWORD
+      - POSTGRES_PASSWORD
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+
+  init-db:
+    build: init-db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=bemorerandom
+      - DB_USER=bemorerandom
+      - DB_PASSWORD
+    depends_on:
+      - db
+
+volumes:
+  postgresql:
+    driver: local

@@ -12,14 +12,11 @@ services:
       - DB_NAME=bemorerandom
       - DB_USER=bemorerandom
       - DB_PASSWORD
-      - POSTGRES_PASSWORD
     depends_on:
       - database
 
   database:
     image: postgres
-    environment:
-      - POSTGRES_PASSWORD
     volumes:
       - postgresql:/var/lib/postgresql/data
 
@@ -34,5 +31,4 @@ services:
       - database
 
 volumes:
-  postgresql:
-    driver: local
+  postgresql: {}

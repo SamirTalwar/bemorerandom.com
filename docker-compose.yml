@@ -8,15 +8,15 @@ services:
     ports:
       - 8080:8080
     environment:
-      - DB_HOST=db.bemorerandomcom_default
+      - DB_HOST=database.bemorerandomcom_default
       - DB_NAME=bemorerandom
       - DB_USER=bemorerandom
       - DB_PASSWORD
       - POSTGRES_PASSWORD
     depends_on:
-      - db
+      - database
 
-  db:
+  database:
     image: postgres
     environment:
       - POSTGRES_PASSWORD
@@ -26,12 +26,12 @@ services:
   init-db:
     build: init-db
     environment:
-      - DB_HOST=db
+      - DB_HOST=database
       - DB_NAME=bemorerandom
       - DB_USER=bemorerandom
       - DB_PASSWORD
     depends_on:
-      - db
+      - database
 
 volumes:
   postgresql:

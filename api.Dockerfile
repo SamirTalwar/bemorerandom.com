@@ -21,4 +21,4 @@ RUN mvn dependency:go-offline dependency:copy-dependencies
 COPY api/src /app/api/src
 RUN mvn package -DskipTests=true -Djar.finalName=app
 
-CMD java -cp api/target/app.jar:api/target/dependency/\* com.bemorerandom.api.ApiServerMain
+CMD ["java", "-cp", "api/target/app.jar:api/target/dependency/*", "com.bemorerandom.api.ApiServerMain"]

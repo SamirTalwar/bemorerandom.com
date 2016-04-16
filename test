@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+
+PROJECT=bemorerandomcom
+COMPOSE=(docker-compose --file='docker-compose.test.yml' --project=$PROJECT)
+TEST_CONTAINER="${PROJECT}_api-test_1"
+
+$COMPOSE build
+$COMPOSE up -d
+STATUS=$(docker wait $TEST_CONTAINER)
+$COMPOSE stop
+if [[ $STATUS -ne 0 ]]; then
+    docker logs $TEST_CONTAINER
+fi
+$COMPOSE down
+
+if [[ $STATUS -eq 0 ]]; then
+    echo >&2 'Test succeeded.'
+else
+    echo >&2 'Test failed.'
+fi
+
+exit $STATUS

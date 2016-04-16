@@ -1,14 +1,16 @@
 version: '2'
 
 services:
-  api:
+  api-test:
     build:
       context: .
       dockerfile: api.Dockerfile
-    ports:
-      - 8080:8080
+    command:
+      - 'mvn'
+      - '-B'
+      - 'verify'
     env_file:
-      - env/production.env
+      - env/test.env
     depends_on:
       - database
       - init-db
@@ -21,7 +23,7 @@ services:
   init-db:
     build: init-db
     env_file:
-      - env/production.env
+      - env/test.env
     depends_on:
       - database
 

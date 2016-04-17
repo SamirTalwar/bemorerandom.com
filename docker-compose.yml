@@ -2,6 +2,7 @@ version: '2'
 
 services:
   api:
+    image: samirtalwar/bemorerandom-api
     build:
       context: .
       dockerfile: api.Dockerfile
@@ -19,7 +20,9 @@ services:
       - postgresql:/var/lib/postgresql/data
 
   init-db:
-    build: init-db
+    image: samirtalwar/bemorerandom-initialize-database
+    build:
+      context: init-db
     env_file:
       - env/production.env
     depends_on:

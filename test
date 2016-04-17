@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+set -e
+
 PROJECT=bemorerandomcom
 COMPOSE=(docker-compose --file='docker-compose.test.yml' --project=$PROJECT)
 TEST_CONTAINER="${PROJECT}_api-test_1"

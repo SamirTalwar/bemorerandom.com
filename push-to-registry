@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+set -e
+
+docker-compose build api init-db
+docker push 'samirtalwar/bemorerandom-api'
+docker push 'samirtalwar/bemorerandom-initialize-database'

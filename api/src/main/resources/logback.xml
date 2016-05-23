@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-16X{traceId} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC-STDOUT" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="STDOUT"/>
+    </appender>
+
+    <logger name="com.bemorerandom" level="DEBUG"/>
+    <logger name="slick.jdbc.JdbcBackend" level="DEBUG"/>
+
+    <logger name="com.twitter.finatra.http.filters.AccessLoggingFilter"
+            level="INFO"
+            additivity="false">
+        <appender-ref ref="ASYNC-STDOUT"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC-STDOUT"/>
+    </root>
+</configuration>

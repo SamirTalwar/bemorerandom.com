@@ -4,7 +4,9 @@ import com.bemorerandom.api.dnd.{DndController, DndJacksonModule}
 import com.bemorerandom.api.xkcd.XkcdController
 import com.fasterxml.jackson.databind
 import com.google.inject.Module
+import com.twitter.finagle.http.{Request, Response}
 import com.twitter.finatra.http.HttpServer
+import com.twitter.finatra.http.filters.{CommonFilters, LoggingMDCFilter, TraceIdMDCFilter}
 import com.twitter.finatra.http.routing.HttpRouter
 import com.twitter.finatra.json.modules.FinatraJacksonModule
 
@@ -27,7 +29,11 @@ class ApiServer extends HttpServer {
   }
 
   override protected def configureHttp(router: HttpRouter): Unit = {
-    router.add[DndController]
-    router.add[XkcdController]
+    router
+      .filter[LoggingMDCFilter[Request, Response]]
+      .filter[TraceIdMDCFilter[Request, Response]]
+      .filter[CommonFilters]
+      .add[DndController]
+      .add[XkcdController]
   }
 }

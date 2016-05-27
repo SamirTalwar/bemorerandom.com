@@ -11,13 +11,8 @@
     </appender>
 
     <logger name="com.bemorerandom" level="DEBUG"/>
-    <logger name="slick.jdbc.JdbcBackend" level="DEBUG"/>
 
-    <logger name="com.twitter.finatra.http.filters.AccessLoggingFilter"
-            level="INFO"
-            additivity="false">
-        <appender-ref ref="ASYNC-STDOUT"/>
-    </logger>
+    <logger name="slick.jdbc.JdbcBackend" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="ASYNC-STDOUT"/>

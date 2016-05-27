@@ -1,9 +1,10 @@
 package com.bemorerandom.api.dnd
 
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
 import com.google.inject.Inject
 import slick.jdbc.JdbcBackend.DatabaseDef
+
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 class NpcGenerator @Inject() (tables: Tables, database: DatabaseDef) {
   import tables._
@@ -11,7 +12,7 @@ class NpcGenerator @Inject() (tables: Tables, database: DatabaseDef) {
 
   val random = SimpleFunction.nullary[Double]("RANDOM")
 
-  def generate(sex: Sex, race: Race): Future[Npc] = {
+  def generate(sex: Sex, race: Race): Future[Option[Npc]] = {
     database.run(
         tables.npcFirstNames.joinLeft(tables.npcLastNames)
           .on { case (first, last) => first.raceName === last.raceName }
@@ -21,8 +22,10 @@ class NpcGenerator @Inject() (tables: Tables, database: DatabaseDef) {
           .sortBy(_ => random)
           .take(1)
           .result)
-        .map(_.head)
-      .map { case (firstName, lastName) => firstName + lastName.map(name => s" $name").getOrElse("") }
-      .map(name => Npc(name, sex, race))
+      .map {
+        _.headOption
+          .map { case (firstName, lastName) => firstName + lastName.map(name => s" $name").getOrElse("") }
+          .map(name => Npc(name, sex, race))
+      }
   }
 }

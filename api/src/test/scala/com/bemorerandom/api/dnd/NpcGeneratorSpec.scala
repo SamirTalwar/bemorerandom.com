@@ -1,13 +1,14 @@
 package com.bemorerandom.api.dnd
 
-import scala.concurrent.Await
-import scala.concurrent.duration._
 import com.bemorerandom.api.{Config, DatabaseConnector}
 import org.junit.runner.RunWith
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{BeforeAndAfter, FunSpec, Matchers}
 import slick.jdbc.JdbcBackend
+
+import scala.concurrent.Await
+import scala.concurrent.duration._
 
 @RunWith(classOf[JUnitRunner])
 class NpcGeneratorSpec extends FunSpec with Matchers with ScalaFutures with BeforeAndAfter {
@@ -37,7 +38,7 @@ class NpcGeneratorSpec extends FunSpec with Matchers with ScalaFutures with Befo
       it("generates a name") {
         val generator = new NpcGenerator(tables, database)
 
-        generator.generate(Female, dwarf).futureValue should (
+        generator.generate(Female, dwarf).futureValue.get should (
           be(Npc("Beyla Ambershard", Female, dwarf)) or
           be(Npc("Fenryl Ambershard", Female, dwarf)) or
           be(Npc("Grenenzel Ambershard", Female, dwarf)) or
@@ -53,10 +54,16 @@ class NpcGeneratorSpec extends FunSpec with Matchers with ScalaFutures with Befo
       it("generates a name even when missing surnames") {
         val generator = new NpcGenerator(tables, database)
 
-        generator.generate(Male, dragonborn).futureValue should (
+        generator.generate(Male, dragonborn).futureValue.get should (
           be(Npc("Andujar", Male, dragonborn)) or
           be(Npc("Armagan", Male, dragonborn)) or
           be(Npc("Armek", Male, dragonborn)))
+      }
+
+      it("generates nothing if it has no data") {
+        val generator = new NpcGenerator(tables, database)
+
+        generator.generate(Female, new Race("sponge")).futureValue should be(None)
       }
     }
   }

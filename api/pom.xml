@@ -18,7 +18,7 @@
             <version>${scala.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.twitter.finatra</groupId>
+            <groupId>com.twitter</groupId>
             <artifactId>finatra-http_${scala.major.version}</artifactId>
             <version>${finatra.version}</version>
         </dependency>
@@ -91,42 +91,42 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.twitter.inject</groupId>
+            <groupId>com.twitter</groupId>
             <artifactId>inject-core_${scala.major.version}</artifactId>
             <version>${finatra.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.twitter.inject</groupId>
+            <groupId>com.twitter</groupId>
             <artifactId>inject-app_${scala.major.version}</artifactId>
             <version>${finatra.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.twitter.inject</groupId>
+            <groupId>com.twitter</groupId>
             <artifactId>inject-modules_${scala.major.version}</artifactId>
             <version>${finatra.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.twitter.inject</groupId>
+            <groupId>com.twitter</groupId>
             <artifactId>inject-server_${scala.major.version}</artifactId>
             <version>${finatra.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.twitter.finatra</groupId>
+            <groupId>com.twitter</groupId>
             <artifactId>finatra-http_${scala.major.version}</artifactId>
             <version>${finatra.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.twitter.finatra</groupId>
+            <groupId>com.twitter</groupId>
             <artifactId>finatra-jackson_${scala.major.version}</artifactId>
             <version>${finatra.version}</version>
             <classifier>tests</classifier>

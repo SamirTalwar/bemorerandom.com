@@ -1,14 +1,15 @@
 package com.bemorerandom.api.dnd
 
+import scala.concurrent.Await
+import scala.concurrent.duration._
+import scala.io.Source
+
 import com.bemorerandom.api.{Config, DatabaseConnector}
 import org.junit.runner.RunWith
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{BeforeAndAfter, FunSpec, Matchers}
 import slick.jdbc.JdbcBackend
-
-import scala.concurrent.Await
-import scala.concurrent.duration._
 
 @RunWith(classOf[JUnitRunner])
 class NpcGeneratorSpec extends FunSpec with Matchers with ScalaFutures with BeforeAndAfter {
@@ -29,7 +30,7 @@ class NpcGeneratorSpec extends FunSpec with Matchers with ScalaFutures with Befo
     connector.clean()
     connector.migrate()
     database = connector.connect()
-    val sql = sqlu"#${io.Source.fromInputStream(getClass.getClassLoader.getResourceAsStream("db/static/dnd-npc-test-names.sql")).mkString}"
+    val sql = sqlu"#${Source.fromInputStream(getClass.getClassLoader.getResourceAsStream("db/static/dnd-npc-test-names.sql")).mkString}"
     Await.result(database.run(sql), atMost = 1.second)
   }
 

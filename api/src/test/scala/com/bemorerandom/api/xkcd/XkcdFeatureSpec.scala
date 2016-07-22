@@ -2,7 +2,7 @@ package com.bemorerandom.api.xkcd
 
 import com.bemorerandom.api.ApiServer
 import com.twitter.finagle.http.Status
-import com.twitter.finatra.http.test.EmbeddedHttpServer
+import com.twitter.finatra.http.EmbeddedHttpServer
 import com.twitter.inject.server.FeatureTest
 
 class XkcdFeatureSpec extends FeatureTest {
